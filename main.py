@@ -7,6 +7,7 @@ from parsers.orzgk_parser import ORZGKParser
 from exceptions import HTMLLoaderError
 from models.statue import Statue
 from obsidian_handlers.md_renderer import MarkdownRenderer
+from obsidian_handlers.md_saver import MarkDownSaver
 
 def _logging_setup():
     load_dotenv()
@@ -26,10 +27,10 @@ if __name__ == "__main__":
     log_level = _logging_setup()
     log = logging.getLogger(__name__)
     log.info("Logging is started with level %s", log_level)
- 
+
     try:    
         html_loader = HTMLLoader()
-        url = "https://www.orzgk.com/product/hundian-studio-bloodborne-serieslady-maria-of-the-astral-clocktower/"
+        url = "https://www.orzgk.com/product/real-studio-jujutsu-kaisen-sukuna-flame-arrow/"
         html = html_loader.load(url)
         log.info("Load HTML: SUCCESS; HTML length = %s", len(html))
     except HTMLLoaderError as e:
@@ -40,7 +41,10 @@ if __name__ == "__main__":
     statue = Statue(statue_data)
     print(str(statue))
 
-    renderer = MarkdownRenderer()
-    statue_md = renderer.render(statue)
+    md_renderer = MarkdownRenderer()
+    statue_md = md_renderer.render(statue)
     print(statue_md)
+
+    md_saver = MarkDownSaver()
+    md_saver.save(statue, statue_md)
 
