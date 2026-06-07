@@ -3,7 +3,10 @@ import logging
 from dotenv import load_dotenv
 
 from parsers.html_loader import HTMLLoader
+from parsers.orzgk_parser import ORZGKParser
 from exceptions import HTMLLoaderError
+from models.statue import Statue
+from obsidian_handlers.md_renderer import MarkdownRenderer
 
 def _logging_setup():
     load_dotenv()
@@ -23,12 +26,19 @@ if __name__ == "__main__":
     log_level = _logging_setup()
     log = logging.getLogger(__name__)
     log.info("Logging is started with level %s", log_level)
-
-    html_loader = HTMLLoader()
-    url = "https://www.orzgk.com/product/hundian-studio-bloodborne-serieslady-maria-of-the-astral-clocktower/" 
-    try:
+ 
+    try:    
+        html_loader = HTMLLoader()
+        url = "https://www.orzgk.com/product/hundian-studio-bloodborne-serieslady-maria-of-the-astral-clocktower/"
         html = html_loader.load(url)
         log.info("Load HTML: SUCCESS; HTML length = %s", len(html))
     except HTMLLoaderError as e:
         log.error("Load HTML: FAILED\nERROR: %s", e)
+
+
+    parser = ORZGKParser()
+    statue_data = parser.parse(html)
+    statue = Statue(statue_data)
+    print(str(statue))
+
 
