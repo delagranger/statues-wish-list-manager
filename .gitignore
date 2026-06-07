@@ -3,3 +3,4 @@ data/
 .env
 documentation.md
 __pycache__
+tasks.txt

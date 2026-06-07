@@ -35,10 +35,12 @@ if __name__ == "__main__":
     except HTMLLoaderError as e:
         log.error("Load HTML: FAILED\nERROR: %s", e)
 
-
     parser = ORZGKParser()
     statue_data = parser.parse(html)
     statue = Statue(statue_data)
     print(str(statue))
 
+    renderer = MarkdownRenderer()
+    statue_md = renderer.render(statue)
+    print(statue_md)
 

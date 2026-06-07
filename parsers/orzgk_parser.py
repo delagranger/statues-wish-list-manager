@@ -5,7 +5,7 @@ class ORZGKParser:
         pass
 
 
-    def parse(self, html):
+    def parse(self, html: str) -> dict:
         _soup = bs4.BeautifulSoup(html, "html.parser")
         statue_data = {}
 
