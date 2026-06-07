@@ -3,6 +3,7 @@ import logging
 from dotenv import load_dotenv
 
 from parsers.html_loader import HTMLLoader
+from exceptions import HTMLLoaderError
 
 def _logging_setup():
     load_dotenv()
@@ -25,6 +26,9 @@ if __name__ == "__main__":
 
     html_loader = HTMLLoader()
     url = "https://www.orzgk.com/product/hundian-studio-bloodborne-serieslady-maria-of-the-astral-clocktower/" 
-    html = html_loader.load(url)
-    log.info("Load HTML: SUCCESS; HTML length = %s", len(html))
+    try:
+        html = html_loader.load(url)
+        log.info("Load HTML: SUCCESS; HTML length = %s", len(html))
+    except HTMLLoaderError as e:
+        log.error("Load HTML: FAILED\nERROR: %s", e)
 

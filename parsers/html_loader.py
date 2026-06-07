@@ -1,4 +1,5 @@
 import requests
+from exceptions import HTMLLoaderError
 
 class HTMLLoader:
     def __init__(self):
@@ -7,5 +8,9 @@ class HTMLLoader:
 
 
     def load(self, url: str) -> str:
-        response = self._session.get(url, timeout=30)
-        return response.text
+        try:
+            response = self._session.get(url, timeout=30)
+            response.raise_for_status()
+            return response.text
+        except requests.exceptions.RequestException as e:
+            raise HTMLLoaderError(str(e)) from e
