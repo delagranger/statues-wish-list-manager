@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 if __name__ == "__main__":
     try:    
         html_loader = HTMLLoader()
-        url = "https://www.orzgk.com/product/dtalon-corgi-progkit-studio-sekiro-emma-pre-order/"
+        url = "https://www.orzgk.com/product/iron-studio-statue-voldemort-and-nagini-harry-potter-legacy-replica-1-4/"
         html = html_loader.load(url)
         log.info("Load HTML: SUCCESS; HTML length = %s", len(html))
     except HTMLLoaderError as e:
@@ -22,7 +22,7 @@ if __name__ == "__main__":
 
     parser = ORZGKParser()
     statue_data = parser.parse(html)
-    statue = Statue(statue_data)
+    statue = Statue(url, statue_data)
 
     md_renderer = MarkdownRenderer()
     statue_md = md_renderer.render(statue)

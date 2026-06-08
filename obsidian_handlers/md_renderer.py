@@ -10,6 +10,7 @@ class MarkdownRenderer:
 
             - Status: {statue.status}
             - Studio: {statue.studio}
+            - URL: {statue.url}
             - Media type: {statue.media_type}
             - Franchise: {statue.franchise}
             - Character: {statue.character}

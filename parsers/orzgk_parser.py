@@ -1,4 +1,5 @@
 import bs4
+from parsers.normalize_data import normalize_media_type
 
 class ORZGKParser:
     def __init__(self):
@@ -23,7 +24,7 @@ class ORZGKParser:
             elif text.startswith("From:"):
                 pref = "From:"
                 media_type, franchise = text[len(pref):].split('-')
-                statue_data["media_type"] = media_type
+                statue_data["media_type"] = normalize_media_type(media_type)
                 statue_data["franchise"] = franchise
             elif text.startswith("Character:"):
                 pref = "Character:"
@@ -34,6 +35,7 @@ class ORZGKParser:
             elif text.startswith("Est Released Time:"):
                 pref = "Est Released Time:"
                 statue_data["release_date"] = text[len(pref):]
+            
         
         return statue_data
         

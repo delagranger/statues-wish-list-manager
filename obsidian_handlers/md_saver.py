@@ -9,6 +9,8 @@ class MarkDownSaver:
         dir_path = self._obsidian_path / statue.media_type.replace('/', '-') / statue.franchise.replace('/', '-') / statue.character.replace('/', '-')
         dir_path.mkdir(parents=True, exist_ok=True)
 
-        file_path = dir_path / f"{statue.title.replace(':', '-')}.md"
+        safe_title = statue.title.replace(':', '-')
+        safe_title = statue.title.replace('/', '-')
+        file_path = dir_path / f"{safe_title}.md"
         file_path.write_text(statue_md, encoding="utf-8")
     
