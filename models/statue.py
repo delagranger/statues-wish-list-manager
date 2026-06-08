@@ -8,7 +8,7 @@ class Statue:
         self.character = data["character"]
         self.dimensions = data["dimensions"]
         self.release_date = data["release_date"]
-    
+
     def __str__(self):
         return "Status: %s\n" \
                "Title: %s\n" \
